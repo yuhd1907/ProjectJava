@@ -50,7 +50,7 @@ public class ProductDAOImpl implements IProductDAO {
     }
 
     @Override
-    public void add(Product product) {
+    public boolean add(Product product) {
         String sql = "INSERT INTO product(name, brand, price, stock) VALUES(?, ?, ?, ?)";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -58,14 +58,15 @@ public class ProductDAOImpl implements IProductDAO {
             ps.setString(2, product.getBrand());
             ps.setDouble(3, product.getPrice());
             ps.setInt(4, product.getStock());
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
-    public void update(Product product) {
+    public boolean update(Product product) {
         String sql = "UPDATE product SET name=?, brand=?, price=?, stock=? WHERE id=?";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -74,22 +75,24 @@ public class ProductDAOImpl implements IProductDAO {
             ps.setDouble(3, product.getPrice());
             ps.setInt(4, product.getStock());
             ps.setInt(5, product.getId());
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
-    public void delete(Integer id) {
+    public boolean delete(Integer id) {
         String sql = "DELETE FROM product WHERE id=?";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override

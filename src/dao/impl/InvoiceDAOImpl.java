@@ -22,7 +22,7 @@ public class InvoiceDAOImpl implements IInvoiceDAO {
     }
 
     @Override
-    public void add(Invoice invoice) {
+    public boolean add(Invoice invoice) {
         String sql = "INSERT INTO invoice(customer_id, created_at, total_amount) VALUES(?, ?, ?)";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -30,10 +30,11 @@ public class InvoiceDAOImpl implements IInvoiceDAO {
             ps.setTimestamp(2, Timestamp.valueOf(
                     invoice.getCreatedAt() != null ? invoice.getCreatedAt() : LocalDateTime.now()));
             ps.setDouble(3, invoice.getTotalAmount());
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
@@ -52,12 +53,12 @@ public class InvoiceDAOImpl implements IInvoiceDAO {
     }
 
     @Override
-    public void update(Invoice invoice) {
+    public boolean update(Invoice invoice) {
         throw new UnsupportedOperationException("Không hỗ trợ cập nhật hóa đơn.");
     }
 
     @Override
-    public void delete(Integer id) {
+    public boolean delete(Integer id) {
         throw new UnsupportedOperationException("Không hỗ trợ xóa hóa đơn.");
     }
 

@@ -21,18 +21,18 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public void add(Product product) {
-        productDAO.add(product);
+    public boolean add(Product product) {
+        return productDAO.add(product);
     }
 
     @Override
-    public void update(Product product) {
-        productDAO.update(product);
+    public boolean update(Product product) {
+        return productDAO.update(product);
     }
 
     @Override
-    public void delete(Integer id) {
-        productDAO.delete(id);
+    public boolean delete(Integer id) {
+        return productDAO.delete(id);
     }
 
     @Override

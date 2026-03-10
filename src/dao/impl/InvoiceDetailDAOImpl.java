@@ -20,7 +20,7 @@ public class InvoiceDetailDAOImpl implements IInvoiceDetailDAO {
     }
 
     @Override
-    public void add(InvoiceDetail detail) {
+    public boolean add(InvoiceDetail detail) {
         String sql = "INSERT INTO invoice_detail(invoice_id, product_id, quantity, unit_price) VALUES(?, ?, ?, ?)";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -28,10 +28,11 @@ public class InvoiceDetailDAOImpl implements IInvoiceDetailDAO {
             ps.setInt(2, detail.getProductId());
             ps.setInt(3, detail.getQuantity());
             ps.setDouble(4, detail.getUnitPrice());
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
@@ -50,12 +51,12 @@ public class InvoiceDetailDAOImpl implements IInvoiceDetailDAO {
     }
 
     @Override
-    public void update(InvoiceDetail detail) {
+    public boolean update(InvoiceDetail detail) {
         throw new UnsupportedOperationException("Không hỗ trợ cập nhật chi tiết hóa đơn.");
     }
 
     @Override
-    public void delete(Integer id) {
+    public boolean delete(Integer id) {
         throw new UnsupportedOperationException("Không hỗ trợ xóa chi tiết hóa đơn.");
     }
 

@@ -3,11 +3,11 @@ package service;
 import java.util.List;
 
 public interface IBaseService<T, ID> {
-    void add(T t);
+    boolean add(T t);
 
-    void update(T t);
+    boolean update(T t);
 
-    void delete(ID id);
+    boolean delete(ID id);
 
     T findById(ID id);
 

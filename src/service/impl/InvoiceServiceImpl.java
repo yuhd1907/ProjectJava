@@ -11,8 +11,8 @@ public class InvoiceServiceImpl implements IInvoiceService {
     private static final IInvoiceDAO invoiceDAO = new InvoiceDAOImpl();
 
     @Override
-    public void add(Invoice invoice) {
-        invoiceDAO.add(invoice);
+    public boolean add(Invoice invoice) {
+        return invoiceDAO.add(invoice);
     }
 
     @Override
@@ -26,13 +26,13 @@ public class InvoiceServiceImpl implements IInvoiceService {
     }
 
     @Override
-    public void update(Invoice invoice) {
-        invoiceDAO.update(invoice);
+    public boolean update(Invoice invoice) {
+        return invoiceDAO.update(invoice);
     }
 
     @Override
-    public void delete(Integer id) {
-        invoiceDAO.delete(id);
+    public boolean delete(Integer id) {
+        return invoiceDAO.delete(id);
     }
 
     @Override
