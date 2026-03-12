@@ -21,7 +21,7 @@ public class InvoiceDetailDAOImpl implements IInvoiceDetailDAO {
 
     @Override
     public boolean add(InvoiceDetail detail) {
-        String sql = "INSERT INTO invoice_detail(invoice_id, product_id, quantity, unit_price) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO invoice_details(invoice_id, product_id, quantity, unit_price) VALUES(?, ?, ?, ?)";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, detail.getInvoiceId());
@@ -37,7 +37,7 @@ public class InvoiceDetailDAOImpl implements IInvoiceDetailDAO {
 
     @Override
     public InvoiceDetail findById(Integer id) {
-        String sql = "SELECT * FROM invoice_detail WHERE id = ?";
+        String sql = "SELECT * FROM invoice_details WHERE id = ?";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -63,7 +63,7 @@ public class InvoiceDetailDAOImpl implements IInvoiceDetailDAO {
     @Override
     public List<InvoiceDetail> findAll() {
         List<InvoiceDetail> list = new ArrayList<>();
-        String sql = "SELECT * FROM invoice_detail ORDER BY id";
+        String sql = "SELECT * FROM invoice_details ORDER BY id";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()) {
@@ -78,7 +78,7 @@ public class InvoiceDetailDAOImpl implements IInvoiceDetailDAO {
     @Override
     public List<InvoiceDetail> findByInvoiceId(int invoiceId) {
         List<InvoiceDetail> list = new ArrayList<>();
-        String sql = "SELECT * FROM invoice_detail WHERE invoice_id = ?";
+        String sql = "SELECT * FROM invoice_details WHERE invoice_id = ?";
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, invoiceId);

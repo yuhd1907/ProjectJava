@@ -41,13 +41,19 @@ public class InvoiceView {
             try {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 switch (choice) {
-                    case 1 -> showAll(scanner);
-                    case 2 -> addInvoice(scanner);
-                    case 3 -> showSearchMenu(scanner);
-                    case 4 -> {
+                    case 1:
+                        showAll(scanner);
+                        break;
+                    case 2:
+                        addInvoice(scanner);
+                        break;
+                    case 3:
+                        showSearchMenu(scanner);
+                        break;
+                    case 4:
                         return;
-                    }
-                    default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 4.");
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 4.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -67,12 +73,16 @@ public class InvoiceView {
             try {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 switch (choice) {
-                    case 1 -> findByCustomerName(scanner);
-                    case 2 -> findByDate(scanner);
-                    case 3 -> {
+                    case 1:
+                        findByCustomerName(scanner);
+                        break;
+                    case 2:
+                        findByDate(scanner);
+                        break;
+                    case 3:
                         return;
-                    }
-                    default -> System.out.println("Lựa chọn không hợp lệ!");
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ!");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -96,13 +106,19 @@ public class InvoiceView {
             try {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 switch (choice) {
-                    case 1 -> revenueByDay(scanner);
-                    case 2 -> revenueByMonth(scanner);
-                    case 3 -> revenueByYear(scanner);
-                    case 4 -> {
+                    case 1:
+                        revenueByDay(scanner);
+                        break;
+                    case 2:
+                        revenueByMonth(scanner);
+                        break;
+                    case 3:
+                        revenueByYear(scanner);
+                        break;
+                    case 4:
                         return;
-                    }
-                    default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 4.");
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 4.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -178,6 +194,11 @@ public class InvoiceView {
 
                 double unitPrice = product.getPrice();
                 double subtotal = unitPrice * quantity;
+                if (totalAmount + subtotal > 99999999.99) {
+                    System.out.println(
+                            "✗ Lỗi: Tổng tiền hóa đơn không được vượt quá 99,999,999.99 VND (Giới hạn hệ thống của Decimal10,2). Vui lòng chia nhỏ hóa đơn.");
+                    continue;
+                }
                 totalAmount += subtotal;
                 orderLines.add(new int[] { productId, quantity });
                 orderPrices.add(new double[] { unitPrice, subtotal });

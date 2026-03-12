@@ -24,15 +24,25 @@ public class CustomerView {
             try {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 switch (choice) {
-                    case 1 -> showAll();
-                    case 2 -> addCustomer(scanner);
-                    case 3 -> updateCustomer(scanner);
-                    case 4 -> deleteCustomer(scanner);
-                    case 5 -> searchCustomer(scanner);
-                    case 6 -> {
+                    case 1:
+                        showAll();
+                        break;
+                    case 2:
+                        addCustomer(scanner);
+                        break;
+                    case 3:
+                        updateCustomer(scanner);
+                        break;
+                    case 4:
+                        deleteCustomer(scanner);
+                        break;
+                    case 5:
+                        searchCustomer(scanner);
+                        break;
+                    case 6:
                         return;
-                    }
-                    default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 6.");
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 6.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -91,9 +101,9 @@ public class CustomerView {
 
         boolean ok = customerService.add(new Customer(0, name, phone, email, address));
         if (ok) {
-            System.out.println("✓ Thêm khách hàng thành công!");
+            System.out.println("Thêm khách hàng thành công.");
         } else {
-            System.out.println("✗ Thêm khách hàng thất bại. Vui lòng thử lại.");
+            System.out.println("Thêm khách hàng thất bại. Vui lòng thử lại");
         }
     }
 

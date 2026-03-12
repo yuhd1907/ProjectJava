@@ -42,16 +42,24 @@ public class AdminView {
             try {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 switch (choice) {
-                    case 1 -> ProductView.showMenu(scanner);
-                    case 2 -> CustomerView.showMenu(scanner);
-                    case 3 -> InvoiceView.showMenu(scanner);
-                    case 4 -> InvoiceView.showRevenueMenu(scanner);
-                    case 5 -> {
+                    case 1:
+                        ProductView.showMenu(scanner);
+                        break;
+                    case 2:
+                        CustomerView.showMenu(scanner);
+                        break;
+                    case 3:
+                        InvoiceView.showMenu(scanner);
+                        break;
+                    case 4:
+                        InvoiceView.showRevenueMenu(scanner);
+                        break;
+                    case 5:
                         System.out.println("Đã đăng xuất. Hẹn gặp lại, " + userLogin.getUsername() + "!");
                         userLogin = null;
                         return;
-                    }
-                    default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 5.");
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 5.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");

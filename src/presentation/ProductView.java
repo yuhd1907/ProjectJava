@@ -26,17 +26,31 @@ public class ProductView {
             try {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 switch (choice) {
-                    case 1 -> showAll();
-                    case 2 -> addProduct(scanner);
-                    case 3 -> updateProduct(scanner);
-                    case 4 -> deleteProduct(scanner);
-                    case 5 -> findByBrand(scanner);
-                    case 6 -> findByPriceRange(scanner);
-                    case 7 -> findByStock(scanner);
-                    case 8 -> {
+                    case 1:
+                        showAll();
+                        break;
+                    case 2:
+                        addProduct(scanner);
+                        break;
+                    case 3:
+                        updateProduct(scanner);
+                        break;
+                    case 4:
+                        deleteProduct(scanner);
+                        break;
+                    case 5:
+                        findByBrand(scanner);
+                        break;
+                    case 6:
+                        findByPriceRange(scanner);
+                        break;
+                    case 7:
+                        findByStock(scanner);
+                        break;
+                    case 8:
                         return;
-                    }
-                    default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 8.");
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 8.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -105,6 +119,10 @@ public class ProductView {
                 System.out.println("Giá phải lớn hơn 0.");
                 return;
             }
+            if (price > 99999999.99) {
+                System.out.println("Giá vượt quá giới hạn (tối đa 99,999,999.99 VND).");
+                return;
+            }
 
             System.out.print("Tồn kho       : ");
             int stock = Integer.parseInt(scanner.nextLine().trim());
@@ -155,12 +173,15 @@ public class ProductView {
                 p.setBrand(brand);
             if (!priceStr.isEmpty()) {
                 double price = Double.parseDouble(priceStr);
-                if (price > 0)
-                    p.setPrice(price);
-                else {
+                if (price <= 0) {
                     System.out.println("Giá không hợp lệ.");
                     return;
                 }
+                if (price > 99999999.99) {
+                    System.out.println("Giá vượt quá giới hạn (tối đa 99,999,999.99 VND).");
+                    return;
+                }
+                p.setPrice(price);
             }
             if (!stockStr.isEmpty()) {
                 int stock = Integer.parseInt(stockStr);
