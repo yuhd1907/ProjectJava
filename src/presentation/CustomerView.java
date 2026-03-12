@@ -84,7 +84,7 @@ public class CustomerView {
         System.out.print("Họ và tên   : ");
         String name = scanner.nextLine().trim();
         if (name.isEmpty()) {
-            System.out.println("✗ Tên không được để trống.");
+            System.out.println("Tên không được để trống.");
             return;
         }
 
@@ -117,7 +117,7 @@ public class CustomerView {
             int id = Integer.parseInt(scanner.nextLine().trim());
             Customer c = customerService.findById(id);
             if (c == null) {
-                System.out.println("✗ Không tìm thấy khách hàng có ID = " + id);
+                System.out.println("Không tìm thấy khách hàng có ID = " + id);
                 return;
             }
 
@@ -136,11 +136,11 @@ public class CustomerView {
             String phone = c.getPhone(); // giữ cũ mặc định
             if (!phoneInput.isEmpty()) {
                 if (!CustomerServiceImpl.isValidPhone(phoneInput)) {
-                    System.out.println("✗ Số điện thoại phải có đúng 10 chữ số và bắt đầu bằng 0.");
+                    System.out.println("Số điện thoại phải có đúng 10 chữ số và bắt đầu bằng 0.");
                     return;
                 }
                 if (customerService.existsByPhone(phoneInput, id)) {
-                    System.out.println("✗ Số điện thoại " + phoneInput + " đã được sử dụng bởi khách hàng khác.");
+                    System.out.println("Số điện thoại " + phoneInput + " đã được sử dụng bởi khách hàng khác.");
                     return;
                 }
                 phone = phoneInput;
@@ -152,7 +152,7 @@ public class CustomerView {
             String email = c.getEmail(); // giữ cũ mặc định
             if (!emailInput.isEmpty()) {
                 if (!CustomerServiceImpl.isValidEmail(emailInput)) {
-                    System.out.println("✗ Email phải có định dạng ...@gmail.com");
+                    System.out.println("Email phải có định dạng ...@gmail.com");
                     return;
                 }
                 email = emailInput;
@@ -170,12 +170,12 @@ public class CustomerView {
 
             boolean ok = customerService.update(c);
             if (ok) {
-                System.out.println("✓ Cập nhật khách hàng thành công!");
+                System.out.println("Cập nhật khách hàng thành công!");
             } else {
-                System.out.println("✗ Cập nhật thất bại. Vui lòng thử lại.");
+                System.out.println("Cập nhật thất bại. Vui lòng thử lại.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("✗ ID không hợp lệ.");
+            System.out.println("ID không hợp lệ.");
         }
     }
 
@@ -189,7 +189,7 @@ public class CustomerView {
             int id = Integer.parseInt(scanner.nextLine().trim());
             Customer c = customerService.findById(id);
             if (c == null) {
-                System.out.println("✗ Không tìm thấy khách hàng có ID = " + id);
+                System.out.println("Không tìm thấy khách hàng có ID = " + id);
                 return;
             }
 
@@ -201,15 +201,15 @@ public class CustomerView {
             if (scanner.nextLine().trim().equalsIgnoreCase("Y")) {
                 boolean ok = customerService.delete(id);
                 if (ok) {
-                    System.out.println("✓ Xóa khách hàng thành công!");
+                    System.out.println("Xóa khách hàng thành công!");
                 } else {
-                    System.out.println("✗ Xóa thất bại. Vui lòng thử lại.");
+                    System.out.println("Xóa thất bại. Vui lòng thử lại.");
                 }
             } else {
                 System.out.println("Đã hủy thao tác xóa.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("✗ ID không hợp lệ.");
+            System.out.println("ID không hợp lệ.");
         }
     }
 
@@ -220,7 +220,7 @@ public class CustomerView {
         System.out.print("Nhập tên cần tìm: ");
         String keyword = scanner.nextLine().trim();
         if (keyword.isEmpty()) {
-            System.out.println("✗ Từ khóa không được để trống.");
+            System.out.println("Từ khóa không được để trống.");
             return;
         }
         List<Customer> results = customerService.findByName(keyword);
@@ -246,11 +246,11 @@ public class CustomerView {
         System.out.print(prompt);
         String phone = scanner.nextLine().trim();
         if (!CustomerServiceImpl.isValidPhone(phone)) {
-            System.out.println("✗ Số điện thoại phải có đúng 10 chữ số và bắt đầu bằng 0.");
+            System.out.println("Số điện thoại phải có đúng 10 chữ số và bắt đầu bằng 0.");
             return null;
         }
         if (customerService.existsByPhone(phone, excludeId)) {
-            System.out.println("✗ Số điện thoại " + phone + " đã được sử dụng bởi khách hàng khác.");
+            System.out.println("Số điện thoại " + phone + " đã được sử dụng bởi khách hàng khác.");
             return null;
         }
         return phone;
@@ -264,7 +264,7 @@ public class CustomerView {
         System.out.print(prompt);
         String email = scanner.nextLine().trim();
         if (!CustomerServiceImpl.isValidEmail(email)) {
-            System.out.println("✗ Email phải có định dạng ...@gmail.com (ví dụ: ten@gmail.com).");
+            System.out.println("Email phải có định dạng ...@gmail.com (ví dụ: ten@gmail.com).");
             return null;
         }
         return email;

@@ -146,7 +146,7 @@ public class InvoiceView {
             int customerId = Integer.parseInt(scanner.nextLine().trim());
             Customer customer = customerService.findById(customerId);
             if (customer == null) {
-                System.out.println("✗ Không tìm thấy khách hàng.");
+                System.out.println("Không tìm thấy khách hàng.");
                 return;
             }
 
@@ -173,22 +173,22 @@ public class InvoiceView {
 
                 Product product = productService.findById(productId);
                 if (product == null) {
-                    System.out.println("✗ Không tìm thấy sản phẩm, thử lại.");
+                    System.out.println("Không tìm thấy sản phẩm, thử lại.");
                     continue;
                 }
                 if (product.getStock() <= 0) {
-                    System.out.println("✗ Sản phẩm đã hết hàng!");
+                    System.out.println("Sản phẩm đã hết hàng!");
                     continue;
                 }
 
                 System.out.print("Số lượng       : ");
                 int quantity = Integer.parseInt(scanner.nextLine().trim());
                 if (quantity <= 0) {
-                    System.out.println("✗ Số lượng phải lớn hơn 0.");
+                    System.out.println("Số lượng phải lớn hơn 0.");
                     continue;
                 }
                 if (quantity > product.getStock()) {
-                    System.out.printf("✗ Tồn kho không đủ! Chỉ còn %d sản phẩm.%n", product.getStock());
+                    System.out.printf("Tồn kho không đủ! Chỉ còn %d sản phẩm.%n", product.getStock());
                     continue;
                 }
 
@@ -196,13 +196,13 @@ public class InvoiceView {
                 double subtotal = unitPrice * quantity;
                 if (totalAmount + subtotal > 99999999.99) {
                     System.out.println(
-                            "✗ Lỗi: Tổng tiền hóa đơn không được vượt quá 99,999,999.99 VND (Giới hạn hệ thống của Decimal10,2). Vui lòng chia nhỏ hóa đơn.");
+                            "Lỗi: Tổng tiền hóa đơn không được vượt quá 99,999,999.99 VND (Giới hạn hệ thống của Decimal10,2). Vui lòng chia nhỏ hóa đơn.");
                     continue;
                 }
                 totalAmount += subtotal;
                 orderLines.add(new int[] { productId, quantity });
                 orderPrices.add(new double[] { unitPrice, subtotal });
-                System.out.printf("  → Đã thêm: %-30s | SL: %d | %,.0f VND%n",
+                System.out.printf("  Đã thêm: %-30s | SL: %d | %,.0f VND%n",
                         product.getName(), quantity, subtotal);
             }
 
@@ -233,14 +233,14 @@ public class InvoiceView {
             Invoice invoice = new Invoice(0, customerId, LocalDateTime.now(), totalAmount);
             boolean saved = invoiceService.add(invoice);
             if (!saved) {
-                System.out.println("✗ Lỗi khi tạo hóa đơn. Vui lòng thử lại.");
+                System.out.println("Lỗi khi tạo hóa đơn. Vui lòng thử lại.");
                 return;
             }
 
             // Lấy invoiceId vừa tạo (lấy hóa đơn mới nhất của khách hàng này)
             List<Invoice> invoices = invoiceService.findByCustomerId(customerId);
             if (invoices.isEmpty()) {
-                System.out.println("✗ Lỗi khi lấy hóa đơn vừa tạo.");
+                System.out.println("Lỗi khi lấy hóa đơn vừa tạo.");
                 return;
             }
             int newInvoiceId = invoices.get(0).getId();
@@ -258,10 +258,10 @@ public class InvoiceView {
                 }
             }
 
-            System.out.printf("✓ Tạo hóa đơn thành công! (Mã hóa đơn: #%d)%n", newInvoiceId);
+            System.out.printf("Tạo hóa đơn thành công! (Mã hóa đơn: #%d)%n", newInvoiceId);
 
         } catch (NumberFormatException e) {
-            System.out.println("✗ Giá trị nhập không hợp lệ.");
+            System.out.println("Giá trị nhập không hợp lệ.");
         }
     }
 
@@ -291,7 +291,7 @@ public class InvoiceView {
     private static void showDetail(int invoiceId) {
         Invoice inv = invoiceService.findById(invoiceId);
         if (inv == null) {
-            System.out.println("✗ Không tìm thấy hóa đơn #" + invoiceId);
+            System.out.println("Không tìm thấy hóa đơn #" + invoiceId);
             return;
         }
         Customer customer = customerService.findById(inv.getCustomerId());
@@ -299,13 +299,13 @@ public class InvoiceView {
                 ? customer.getName() + " (" + customer.getPhone() + ")"
                 : "ID#" + inv.getCustomerId();
 
-        System.out.println("\n╔══════════════ CHI TIẾT HÓA ĐƠN #" + invoiceId + " ══════════════╗");
+        System.out.println("\n+-------------- CHI TIẾT HÓA ĐƠN #" + invoiceId + " --------------+");
         System.out.printf("  Khách hàng : %s%n", customerInfo);
         System.out.printf("  Thời gian  : %s%n",
                 inv.getCreatedAt() != null
                         ? inv.getCreatedAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
                         : "N/A");
-        System.out.println("  ─────────────────────────────────────────────────────────────");
+        System.out.println("  -------------------------------------------------------------");
 
         List<InvoiceDetail> details = invoiceDetailDAO.findByInvoiceId(invoiceId);
         if (details.isEmpty()) {
@@ -313,7 +313,7 @@ public class InvoiceView {
         } else {
             System.out.printf("  %-4s  %-35s  %6s  %16s  %16s%n",
                     "STT", "Tên sản phẩm", "SL", "Đơn giá (VND)", "Thành tiền (VND)");
-            System.out.println("  ─────────────────────────────────────────────────────────────");
+            System.out.println("  -------------------------------------------------------------");
             int stt = 1;
             for (InvoiceDetail d : details) {
                 Product p = productService.findById(d.getProductId());
@@ -322,9 +322,9 @@ public class InvoiceView {
                         stt++, pName, d.getQuantity(), d.getUnitPrice(), d.getSubtotal());
             }
         }
-        System.out.println("  ─────────────────────────────────────────────────────────────");
+        System.out.println("  -------------------------------------------------------------");
         System.out.printf("  %52s  %,16.0f%n", "TỔNG TIỀN:", inv.getTotalAmount());
-        System.out.println("╚═══════════════════════════════════════════════════════════════╝");
+        System.out.println("+---------------------------------------------------------------+");
     }
 
     private static void printHeader() {
@@ -368,7 +368,7 @@ public class InvoiceView {
         System.out.print("Nhập tên khách hàng (hoặc một phần tên): ");
         String keyword = scanner.nextLine().trim();
         if (keyword.isEmpty()) {
-            System.out.println("✗ Tên không được để trống.");
+            System.out.println("Tên không được để trống.");
             return;
         }
         List<Customer> matched = customerService.findByName(keyword);
@@ -395,7 +395,7 @@ public class InvoiceView {
         try {
             java.time.LocalDate.parse(dateStr);
         } catch (DateTimeParseException e) {
-            System.out.println("✗ Định dạng ngày không hợp lệ. Vui lòng nhập theo dạng yyyy-MM-dd.");
+            System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập theo dạng yyyy-MM-dd.");
             return;
         }
         printResult(invoiceService.findByDate(dateStr));
@@ -411,14 +411,14 @@ public class InvoiceView {
         try {
             java.time.LocalDate.parse(dateStr);
         } catch (DateTimeParseException e) {
-            System.out.println("✗ Định dạng ngày không hợp lệ.");
+            System.out.println("Định dạng ngày không hợp lệ.");
             return;
         }
         double revenue = invoiceService.revenueByDay(dateStr);
-        System.out.println("────────────────────────────────────────");
+        System.out.println("----------------------------------------");
         System.out.printf("  Doanh thu ngày %s : %,.0f VND%n",
                 formatDate(dateStr), revenue);
-        System.out.println("────────────────────────────────────────");
+        System.out.println("----------------------------------------");
     }
 
     private static void revenueByMonth(Scanner scanner) {
@@ -426,17 +426,17 @@ public class InvoiceView {
             System.out.print("Nhập tháng (1-12) : ");
             int month = Integer.parseInt(scanner.nextLine().trim());
             if (month < 1 || month > 12) {
-                System.out.println("✗ Tháng phải từ 1 đến 12.");
+                System.out.println("Tháng phải từ 1 đến 12.");
                 return;
             }
             System.out.print("Nhập năm          : ");
             int year = Integer.parseInt(scanner.nextLine().trim());
             double revenue = invoiceService.revenueByMonth(month, year);
-            System.out.println("────────────────────────────────────────");
+            System.out.println("----------------------------------------");
             System.out.printf("  Doanh thu tháng %02d/%d : %,.0f VND%n", month, year, revenue);
-            System.out.println("────────────────────────────────────────");
+            System.out.println("----------------------------------------");
         } catch (NumberFormatException e) {
-            System.out.println("✗ Giá trị nhập không hợp lệ.");
+            System.out.println("Giá trị nhập không hợp lệ.");
         }
     }
 
@@ -445,11 +445,11 @@ public class InvoiceView {
             System.out.print("Nhập năm : ");
             int year = Integer.parseInt(scanner.nextLine().trim());
             double revenue = invoiceService.revenueByYear(year);
-            System.out.println("────────────────────────────────────────");
+            System.out.println("----------------------------------------");
             System.out.printf("  Doanh thu năm %d : %,.0f VND%n", year, revenue);
-            System.out.println("────────────────────────────────────────");
+            System.out.println("----------------------------------------");
         } catch (NumberFormatException e) {
-            System.out.println("✗ Giá trị nhập không hợp lệ.");
+            System.out.println("Giá trị nhập không hợp lệ.");
         }
     }
 
@@ -457,7 +457,7 @@ public class InvoiceView {
     // UTILITIES
     // =====================================================================
 
-    /** Chuyển "2025-03-10" → "10/03/2025" cho hiển thị */
+    /** Chuyển "2025-03-10" -> "10/03/2025" cho hiển thị */
     private static String formatDate(String isoDate) {
         try {
             java.time.LocalDate d = java.time.LocalDate.parse(isoDate);

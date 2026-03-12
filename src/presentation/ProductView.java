@@ -132,7 +132,7 @@ public class ProductView {
             }
 
             productService.add(new Product(0, name, brand, price, stock));
-            System.out.println("✓ Thêm sản phẩm thành công!");
+            System.out.println("Thêm sản phẩm thành công!");
         } catch (NumberFormatException e) {
             System.out.println("Giá hoặc tồn kho không hợp lệ.");
         }
@@ -194,7 +194,7 @@ public class ProductView {
             }
 
             productService.update(p);
-            System.out.println("✓ Cập nhật sản phẩm thành công!");
+            System.out.println("Cập nhật sản phẩm thành công!");
         } catch (NumberFormatException e) {
             System.out.println("Giá trị nhập không hợp lệ.");
         }
@@ -221,7 +221,7 @@ public class ProductView {
             System.out.print("Bạn có chắc muốn xóa? (Y/N): ");
             if (scanner.nextLine().trim().equalsIgnoreCase("Y")) {
                 productService.delete(id);
-                System.out.println("✓ Xóa sản phẩm thành công!");
+                System.out.println("Xóa sản phẩm thành công!");
             } else {
                 System.out.println("Đã hủy thao tác xóa.");
             }
