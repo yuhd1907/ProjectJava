@@ -1,7 +1,5 @@
 # MÔ TẢ LUỒNG HOẠT ĐỘNG CỦA HỆ THỐNG QUẢN LÝ CỬA HÀNG ĐIỆN THOẠI
 
-Tài liệu này mô tả chi tiết luồng hoạt động (flow) thực tế của các chức năng bên trong dự án, từ lúc người dùng (Admin) khởi động chương trình cho đến khi kết thúc phiên làm việc. Tất cả thông tin được trình bày dưới dạng văn bản thuần túy, không bao gồm ký tự đặc biệt hay biểu tượng (icon) theo yêu cầu.
-
 ## 1. KHỞI ĐỘNG VÀ ĐĂNG NHẬP
 Khi chạy chương trình chính (Main.java), hệ thống thực hiện các bước:
 - Hiển thị màn hình chào mừng và Menu Chính của hệ thống.
