@@ -59,7 +59,7 @@ public class AdminView {
                         userLogin = null;
                         return;
                     default:
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 5.");
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");

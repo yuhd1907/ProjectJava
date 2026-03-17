@@ -53,7 +53,7 @@ public class InvoiceView {
                     case 4:
                         return;
                     default:
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 4.");
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -118,7 +118,7 @@ public class InvoiceView {
                     case 4:
                         return;
                     default:
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 4.");
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -196,7 +196,7 @@ public class InvoiceView {
                 double subtotal = unitPrice * quantity;
                 if (totalAmount + subtotal > 99999999.99) {
                     System.out.println(
-                            "Lỗi: Tổng tiền hóa đơn không được vượt quá 99,999,999.99 VND (Giới hạn hệ thống của Decimal10,2). Vui lòng chia nhỏ hóa đơn.");
+                            "Lỗi: Tổng tiền hóa đơn không được vượt quá 99,999,999.99 VND. Vui lòng chia nhỏ hóa đơn.");
                     continue;
                 }
                 totalAmount += subtotal;

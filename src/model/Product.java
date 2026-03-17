@@ -60,7 +60,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return String.format("| %-4d | %-25s | %-12s | %,12.0f | %-8d |",
+        return String.format("| %-5d | %-35s | %-12s | %,12.0f | %-8d |",
                 id, name, brand, price, stock);
     }
 }

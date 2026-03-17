@@ -50,7 +50,7 @@ public class ProductView {
                     case 8:
                         return;
                     default:
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 8.");
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -85,13 +85,13 @@ public class ProductView {
 
     private static void printTableHeader() {
         printDivider();
-        System.out.printf("| %-4s | %-25s | %-12s | %12s | %-8s |%n",
+        System.out.printf("| %-5s | %-35s | %-12s | %12s | %-8s |\n",
                 "ID", "Tên sản phẩm", "Hãng", "Giá (VND)", "Tồn kho");
         printDivider();
     }
 
     private static void printDivider() {
-        System.out.println("+------+---------------------------+--------------+--------------+----------+");
+        System.out.printf("+%s+%s+%s+%s+%s+\n", "-".repeat(7), "-".repeat(37), "-".repeat(14), "-".repeat(14), "-".repeat(10));
     }
 
     // ==================== THÊM ====================
@@ -148,14 +148,14 @@ public class ProductView {
             int id = Integer.parseInt(scanner.nextLine().trim());
             Product p = productService.findById(id);
             if (p == null) {
-                System.out.println("Không tìm thấy sản phẩm có ID = " + id);
-                return;
+                System.out.println("ID sản phẩm không tồn tại.");
+                updateProduct(scanner);
             }
 
             System.out.println("Thông tin hiện tại:");
-            printTableHeader();
-            System.out.println(p);
-            printDivider();
+//            printTableHeader();
+//            System.out.println(p);
+//            printDivider();
             System.out.println("(Nhấn Enter để giữ nguyên giá trị cũ)");
 
             System.out.print("Tên mới       : ");
@@ -210,7 +210,7 @@ public class ProductView {
             int id = Integer.parseInt(scanner.nextLine().trim());
             Product p = productService.findById(id);
             if (p == null) {
-                System.out.println("Không tìm thấy sản phẩm có ID = " + id);
+                System.out.println("ID sản phẩm không tồn tại.");
                 return;
             }
 

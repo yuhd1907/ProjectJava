@@ -42,7 +42,7 @@ public class CustomerView {
                     case 6:
                         return;
                     default:
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập từ 1 đến 6.");
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập số hợp lệ.");
@@ -66,14 +66,13 @@ public class CustomerView {
 
     private static void printHeader() {
         printDivider();
-        System.out.printf("| %-4s | %-20s | %-13s | %-30s | %-20s |%n",
+        System.out.printf("| %-4s | %-20s | %-13s | %-30s | %-20s |\n",
                 "ID", "Họ và tên", "Điện thoại", "Email", "Địa chỉ");
         printDivider();
     }
 
     private static void printDivider() {
-        System.out.println(
-                "+------+----------------------+---------------+--------------------------------+----------------------+");
+        System.out.printf("+%s+%s+%s+%s+%s+\n", "-".repeat(6), "-".repeat(22), "-".repeat(15), "-".repeat(32), "-".repeat(22));
     }
 
     // ===================== THÊM =====================
